@@ -1,0 +1,9 @@
+<div class="row">
+    {{#each newsStuff}}
+        <div class="col-md-12 rowArea">
+            <a href= {{link}}> <h5>{{title}}</h5></a>
+            <p>{{excerpt}}</p>
+            <button type="submit" id="{{_id}}" data-id="{{_id}}" class="btn btn-success save btn-sm"> Save This Article </button>
+        </div>
+    {{/each}}
+</div>

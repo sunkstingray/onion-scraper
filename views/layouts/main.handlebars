@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- This links to the CSS file -->
+    <link rel="stylesheet" href="/css/style.css" type="text/css" />
+    <!-- This links the javascript -->
+	<script type="text/javascript" src="/app.js"></script>
+    <!-- This links the google font -->
+    <link href="https://fonts.googleapis.com/css?family=Lusitana:700" rel="stylesheet">
+
+    <title>News Scraper</title>
+ 	</head>
+ 	<body>
+        {{!--Navigation bar--}}
+        <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+            <a class="navbar-brand" href="/">NYT News Scraper</a>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/articles">Scraped Articles <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/saved">Saved Articles</a>
+                    </li>
+                </ul>
+                {{!-- <span class="navbar-text">WELCOME TO NEWS SCRAPER OF THE ONION</span> --}}
+            </div>
+        </nav>
+        <div class="container">
+ 		    {{{ body }}}
+        </div>
+    </body> 	
+</html>

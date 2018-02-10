@@ -1,0 +1,47 @@
+body {
+	background-image: url("/images/newspaper.jpg");
+	background-repeat: repeat;
+	color: rgb(63, 62, 65);
+	font-family: 'Lusitana', serif;
+}
+
+.rowArea {
+	margin-top: 5px;
+	background-color: rgb(236, 248, 250);
+	border-color: rgb(7, 168, 61);
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.noteArea {
+	color: #949596;
+}
+
+/* .noteForm {
+	background-color: #292b2c;
+	padding: 15px;
+	position: fixed;
+	width: 30%;
+	top: 60px;
+	right: 10px;
+} */
+
+#welcome_title {
+	background-color: #292b2c;
+	border: solid 3px;
+}
+
+.container {
+	margin-top: 55px;
+}
+
+a h5 {
+	color: #062153;
+	font-size: 24px;
+}
+
+.noteSection {
+	margin-top: 20px;
+}

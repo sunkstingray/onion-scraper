@@ -1,0 +1,18 @@
+<div class="row">
+    {{#each newsStuff}}
+        <div class="col-md-12 rowArea">
+
+            <a href= {{link}}> <h5>{{title}}</h5></a>
+            <p>{{excerpt}}</p>
+            <button type="submit" data-id="{{_id}}" title-id="{{title}}" class="btn btn-danger btn-sm deleteFromSaved saveOrDelete"> Delete Article from Saved </button>
+            <form class="noteForm">
+                <div class="form-group noteSection">
+                    <textarea class="form-control noteTextArea {{_id}}" rows="5" placeholder="Enter your thoughts about this article..."></textarea>
+                    <br>
+                    <button type="submit" data-id="{{_id}}" title-id="{{title}}" class="btn btn-success saveNote"> Save this Note </button>
+                    {{!-- <button type="submit" data-id="{{_id}}" title-id="{{title}}" class="btn btn-danger deleteNote"> Delete this Note </button> --}}
+                </div>
+            </form>
+        </div>
+    {{/each}}
+</div>
