@@ -1,0 +1,25 @@
+<div class = "row">
+    <div class="col-md-12 rowArea">
+    <form class="noteForm">
+        <div class="form-group noteSection">
+            <textarea class="form-control noteTextArea {{article}}" rows="5" placeholder="Enter your thoughts about this article..."></textarea>
+            <br>
+            <button type="submit" article-id="{{article}}" class="btn btn-success saveNote"> Save this Note </button>
+            {{!-- <button type="submit" data-id="{{_id}}" title-id="{{title}}" class="btn btn-danger deleteNote"> Delete this Note </button> --}}
+        </div>
+    </form>
+</div>
+</div>
+                
+                
+                
+<div class="row">
+    {{#each noteList}}
+        <div class="col-md-12 rowArea">
+
+            <p>{{body}}</p>
+            <button type="submit" data-id="{{_id}}"  class="btn btn-danger btn-sm deleteFromSaved saveOrDelete"> Delete this Note </button>
+
+        </div>
+    {{/each}}
+</div>

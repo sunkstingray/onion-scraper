@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 var NoteSchema = new Schema({
   // `article` references an article id
-  article: [{type: Schema.Types.ObjectId, ref: 'Article'}],
+  article: String,
   // `body` is of type String
   body: String
 });

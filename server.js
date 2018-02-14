@@ -63,7 +63,7 @@ app.set("view engine", "handlebars");
 // This route will scrape the Onion's website
 app.get("/", function(req, res) {
     // Each time the user "scrapes", this will remove any article the user hasn't previously saved
-    // mydb.collection("articles").remove({"savedNews":false});
+    db.Article.find({"savedNews":false}).remove().exec();
 
     request("http://www.nytimes.com/", function(error, response, html) {
         var newArray = [];
@@ -106,7 +106,7 @@ app.get("/", function(req, res) {
         });
         //var news = {newsStuff: newArray}
         //res.render("index", news);
-        res.redirect("/articles");
+        res.redirect("/index");
     });
 
 });
@@ -122,7 +122,7 @@ app.get("/saved", function(req, res) {
             res.send(error);
         } else {
             if (doc.length === 0) {
-                res.redirect("/articles");
+                res.redirect("/");
             } else {
                 var news = {newsStuff: doc}
                 res.render("saved", news);
@@ -131,8 +131,27 @@ app.get("/saved", function(req, res) {
     })
 });
 
+
+// // This route will get all the notes for an article
+app.get("/notes/:article", function(req, res) {
+    console.log("-------SAVED ROUTE-------");
+    db.Note.find({"article": req.params.article}, function(error, doc) {
+        if (error) {
+            res.send(error);
+        } else {
+            if (doc.length === 0) {
+                res.redirect("/");
+            } else {
+                var notes = {noteList: doc}
+                res.render("notes", notes);
+            }
+        }
+    })
+});
+
+
 // // This route will get the last 10 scrapped articles from the db
-app.get("/articles", function(req, res) {
+app.get("/index", function(req, res) {
     console.log("-------SCRAPED ROUTE-------");
     db.Article.find({"savedNews":false}, function(error, doc) {
         if (error) {
@@ -148,8 +167,7 @@ app.get("/articles", function(req, res) {
     });
 });
 
-// // This route selects a specific id and will save or delete the article,
-// // and will add a note if the user enters one
+// // This route selects a specific id and will save or delete the article
 app.post("/articles/:id", function(req, res) {
     var savedNews = req.body.savedNews;
 
@@ -171,30 +189,12 @@ app.post("/articles/:id", function(req, res) {
                     res.send(doc);
                 }
             });
-    } else {
-        var newNote = new Note(req.body);
-        
-        newNote.save(function(error, doc) {
-            if (error) {
-            console.log(error);
-            } else { 
-                db.Article.findOneAndUpdate({ "_id": req.params.id }, { "note": doc._id }
-                )
-                .exec(function(err, doc) {
-                    if (err) {
-                        console.log(err);
-                    } else { 
-                        res.send(doc);
-                    }
-                });
-            }
-        }); 
     }
 });
 
 // // This route adds a note to an article
 app.post("/note", function(req, res) {
-    //console.log(req);
+    console.log("*********************");
 
     var result = {};
 
@@ -202,9 +202,9 @@ app.post("/note", function(req, res) {
     result.article = req.body.id;
     
     db.Note.create(result)
-    .then(function(dbArticle) {
+    .then(function(dbNote) {
     // View the added result in the console
-    console.log(dbArticle);
+    console.log(dbNote);
     })
     .catch(function(err) {
     // If an error occurred, send it to the client
