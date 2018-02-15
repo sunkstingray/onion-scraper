@@ -141,6 +141,7 @@ app.get("/notes/:article", function(req, res) {
         if (error) {
             res.send(error);
         } else {
+            var noteDoc = doc;
             db.Article.find({"_id":req.params.article}, function(error, doc) {
                 if (error) {
                     res.send(error);
@@ -148,7 +149,7 @@ app.get("/notes/:article", function(req, res) {
                     noteTitle = doc[0].title;
                     console.log("title:"+noteTitle);
                     var notes = {
-                        noteList: doc,
+                        noteList: noteDoc,
                         articleId: req.params.article,
                         noteTitle: noteTitle
                     }
@@ -186,6 +187,8 @@ app.get("/index", function(req, res) {
 
 // // This route selects a specific id and will save or delete the article
 app.post("/articles/:id", function(req, res) {
+
+    console.log("---------Save and Delete Path----------")
     var savedNews = req.body.savedNews;
 
     if (savedNews === "true") {
@@ -230,6 +233,25 @@ app.post("/notes/:article", function(req, res) {
     return res.json(err);
     });
     res.redirect("/notes/" + req.params.article);
+});
+
+// // This route deletes a note from an article
+app.post("/notes/delete/:id.:article", function(req, res) {
+    console.log("*********** NOTE DELETED **********");
+
+    var id = req.params.id;
+    var article = req.params.article;
+    
+    db.Note.findByIdAndRemove(id)
+    .then(function(dbNote) {
+    // View the added result in the console
+    console.log(dbNote);
+    })
+    .catch(function(err) {
+    // If an error occurred, send it to the client
+    return res.json(err);
+    });
+    res.redirect("/notes/" + article);
 });
 
 // // This route will show the note on a specific article

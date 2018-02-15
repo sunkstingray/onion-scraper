@@ -5,7 +5,7 @@
         <div class="form-group noteSection">
             <textarea class="form-control noteTextArea {{articleId}}" rows="5" name = "noteBody" placeholder="Enter your thoughts about this article..."></textarea>
             <br>
-            <button type="submit" article-id="{{articleId}}" id = "saveNote" class="btn btn-success"> Save this Note {{articleId}}</button>
+            <button type="submit" article-id="{{articleId}}" id = "saveNote" class="btn btn-success"> Save this Note</button>
         </div>
     </form>
     </div>
@@ -16,8 +16,11 @@
         <div class="col-md-12 rowArea">
 
             <p>{{body}}</p>
-            <button type="submit" data-id="{{_id}}" class="btn btn-danger btn-sm deleteFromSaved"> Delete this Note </button>
-
+            <form class="noteForm" action = "/notes/delete/{{_id}}.{{../articleId}}" method = "post">
+                <div class="form-group noteSection">
+                    <button type="submit" data-id="{{_id}}" class="btn btn-danger btn-sm deleteNote"> Delete this Note </button>
+                </div>
+            </form>
         </div>
     {{/each}}
 </div>

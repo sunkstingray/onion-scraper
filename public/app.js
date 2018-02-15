@@ -12,7 +12,7 @@ var titleofNote = "";
 $(document).on("click", ".save", function() {
   id = $(this).attr("data-id");
   $("#" + id).hide();
-
+    console.log("Save button clicked!");
   $.ajax({
       method: "POST",
       url: "/articles/" + id,
@@ -85,24 +85,24 @@ $(document).on("click", ".deleteFromSaved", function() {
 //   });
 
 // This deletes the note from the db
-$(document).on("click", "#deleteNote", function() {
-  $(".noteForm").fadeOut("slow");
-  // This empties the form
-  document.getElementById("noteForm").reset();
-  $(".noteSection").hide();
-  $(".editNote").hide();
-  $(".editting").hide();
-  $(".saveOrDelete").show();
+// $(document).on("click", ".deleteNote", function() {
+// //   $(".noteForm").fadeOut("slow");
+// //   // This empties the form
+// //   document.getElementById("noteForm").reset();
+// //   $(".noteSection").hide();
+// //   $(".editNote").hide();
+// //   $(".editting").hide();
+// //   $(".saveOrDelete").show();
 
-  $.ajax({
-      method: "POST",
-      url: "/articles/" + id,
-      data: {
-          body: ""
-      }
-  })
-  .done(function(data) { 
-      $(".saveNote").hide();
-      $(".deleteNote").hide();  
-  });
-});
+//   $.ajax({
+//       method: "POST",
+//       url: "/notes/delete/" + id,
+//       data: {
+//           body: ""
+//       }
+//   })
+//   .done(function(data) { 
+//       $(".saveNote").hide();
+//       $(".deleteNote").hide();  
+//   });
+// });
