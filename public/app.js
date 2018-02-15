@@ -8,11 +8,6 @@
 var id = "";
 var titleofNote = "";
 
-// This will run the scrape route to get the articles
-// $(document).on("click", "#scrape", function() {
-//   location.href = "/scrape";
-// });
-
 // This will save the article to the saved page
 $(document).on("click", ".save", function() {
   id = $(this).attr("data-id");
@@ -63,20 +58,31 @@ $(document).on("click", ".deleteFromSaved", function() {
 //   });
 // });
 
+// This will get the notes for a given article
+// $(document).on("click", ".gotoNote", function() {
+//     var article = $(this).attr("data-article");
+//     $.ajax({
+//         method: "GET",
+//         url: "/notes/" + article
+//     });
+//   });
+
 // This will save the user entered note to the db
-$(document).on("click", ".saveNote", function() {
-    var article = $(this).attr("article-id");
-    var body = $(".article").val().trim();
-    console.log(article + "----" + body);
-    $.ajax({
-        method: "POST",
-        url: "/note/",
-        data: {
-            article: article,
-            body: body
-        }
-    });
-  });
+// $(document).on("click", "#saveNote", function() {
+//     event.preventDefault();
+//     console.log("Note Save!!!!!!");
+//     // var article = $(this).attr("data-article");
+//     // var body = $(".article").val().trim();
+//     // console.log(article + "----" + body);
+//     // $.ajax({
+//     //     method: "POST",
+//     //     url: "/notes/" + article,
+//     //     data: {
+//     //         article: article,
+//     //         body: body
+//     //     }
+//     // });
+//   });
 
 // This deletes the note from the db
 $(document).on("click", "#deleteNote", function() {

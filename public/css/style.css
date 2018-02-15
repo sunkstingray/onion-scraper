@@ -45,3 +45,7 @@ a h5 {
 .noteSection {
 	margin-top: 20px;
 }
+
+.btn {
+	cursor: pointer;
+}
