@@ -4,10 +4,6 @@ var bodyParser = require("body-parser");
 var request = require("request");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
 var cheerio = require("cheerio");
 
 // Require all models
@@ -34,9 +30,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-  // useMongoClient: true
-});
+mongoose.connect(MONGODB_URI);
 
 var mydb = mongoose.connection;
 
@@ -56,11 +50,7 @@ app.set("view engine", "handlebars");
 
 // Routes
 
-// app.get("/", function(req, res) {
-//     res.render("index");
-// });
-
-// This route will scrape the Onion's website
+// This route will scrape the NYT's website
 app.get("/", function(req, res) {
     console.log("-------INDEX ROUTE-------");
     // Each time the user "scrapes", this will remove any article the user hasn't previously saved
@@ -81,17 +71,11 @@ app.get("/", function(req, res) {
             result.title = $(this).children('h2').children('a').text().trim();
             result.link = $(this).children('h2').children('a').attr('href');
             result.excerpt = $(this).children('p.summary').text().trim();
-            //console.log($(this));
             result.savedNews = false;
-            // result.pic = $(this).children(".thumb").text();
-            //console.log(result);
+
             entry = new db.Article(result);
 
-            // For handlebars to recognize the id
-            //entry.newsId = entry._id;
-
             if (result.title){
-            //newArray.push(entry);
             
             // Create a new Article using the `result` object built from scraping
             db.Article.create(result)
@@ -105,8 +89,7 @@ app.get("/", function(req, res) {
                 });
             }
         });
-        //var news = {newsStuff: newArray}
-        //res.render("index", news);
+
         res.redirect("/index");
     });
 
@@ -157,12 +140,6 @@ app.get("/notes/:article", function(req, res) {
                 }
             });
 
-            // var notes = {
-            //     noteList: doc,
-            //     articleId: req.params.article,
-            //     noteTitle: noteTitle
-            // }
-            // res.render("notes", notes);
             }
     })
 });
@@ -253,19 +230,6 @@ app.post("/notes/delete/:id.:article", function(req, res) {
     });
     res.redirect("/notes/" + article);
 });
-
-// // This route will show the note on a specific article
-// app.get("/articles/:id", function(req, res) {
-//     db.Article.findOne({ "_id": req.params.id })
-//     .populate("note")
-//     .exec(function(error, doc) {
-//         if (error) {
-//             console.log(error);
-//         } else {
-//             res.json(doc);
-//         }
-//     });
-// });
 
 // Start the server
 app.listen(PORT, function() {
